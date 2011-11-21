@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF" >
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="16px" >
+
+        <TableRow >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="User Name"
+                android:textColor="#282828"
+                android:textSize="14px"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12px"
+                android:layout_marginBottom="12px"
+                android:textColor="#282828"
+                android:textSize="14px"
+                android:width="100px"
+                android:background="#F0F0F0" />
+        </TableRow>
+
+        <TableRow >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:text="Password"
+                android:textColor="#282828"
+                android:textSize="14px"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12px"
+                android:password="true"
+                android:textColor="#282828"
+                android:textSize="14px"
+                android:width="100px"
+                android:background="#F0F0F0" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="16px"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/loginButton"
+                android:layout_width="wrap_content"
+                android:layout_height="22px"
+                android:background="#282828"
+                android:text="Login"
+                android:textColor="#FFFFFF"
+                android:textSize="14px"
+                android:textStyle="bold" />
+        </TableRow>
+    </TableLayout>
+    
+</LinearLayout>
