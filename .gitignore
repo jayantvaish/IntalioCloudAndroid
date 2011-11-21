@@ -3,3 +3,5 @@ gen
 assets
 project.properties
 proguard.cfg
+.classpath
+.project
