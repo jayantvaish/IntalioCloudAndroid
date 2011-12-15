@@ -2,6 +2,7 @@ package com.intalio.cloud.android.view;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.concurrent.ExecutionException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +23,11 @@ import com.intalio.cloud.android.model.Records;
 
 /**
  *
- *Defines activity for viewing general record details.
+ *Defines activity for viewing general record details,
+ *which are hold into table layout in the forms of rows.
+ *
+ *It gets the data from the json objects and the iterated
+ *with keys which are shown in rows with their values. 
  */
 public class Info extends Activity {
 
@@ -46,6 +51,10 @@ public class Info extends Activity {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			e.printStackTrace();
 		}
 
 		if (recordsInJson != null) {
@@ -62,36 +71,36 @@ public class Info extends Activity {
 						e.printStackTrace();
 					}
 	
-					TableRow tr = new TableRow(this);
-					tr.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+					TableRow row = new TableRow(this);
+					row.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 							LayoutParams.WRAP_CONTENT));
 	
-					TextView tv = new TextView(this);
-					tv.setText(key + "  ");
-					tv.setTextColor(Color.BLACK);
-					tv.setBackgroundColor(Color.parseColor(Constants.BACKGROUND_COLOR));
-					tv.setGravity(Gravity.RIGHT);
-					tv.setTextSize(16);
-					tv.setTypeface(Typeface.DEFAULT_BOLD);
+					TextView textViewForKey = new TextView(this);
+					textViewForKey.setText(key + "  ");
+					textViewForKey.setTextColor(Color.BLACK);
+					textViewForKey.setTextSize(16);
+					textViewForKey.setBackgroundColor(Color.parseColor(Constants.BACKGROUND_COLOR));
+					textViewForKey.setGravity(Gravity.RIGHT);
+					textViewForKey.setTypeface(Typeface.DEFAULT_BOLD);
+					
 	
-					TextView tv1 = new TextView(this);
-					tv1.setSingleLine(false);
-					tv1.setText("  " + value);
-					tv1.setTextColor(Color.BLACK);
-					tv1.setTextSize(16);
-					tv1.setBackgroundColor(Color.parseColor(Constants.BACKGROUND_COLOR));
-					tv1.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+					TextView textViewForValue = new TextView(this);
+					textViewForValue.setText("  " + value);
+					textViewForValue.setTextColor(Color.BLACK);
+					textViewForValue.setTextSize(16);
+					textViewForValue.setBackgroundColor(Color.parseColor(Constants.BACKGROUND_COLOR));
+					textViewForValue.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
 							LayoutParams.FILL_PARENT, 1f));
 	
-					tr.addView(tv);
-					tr.addView(tv1);
+					row.addView(textViewForKey);
+					row.addView(textViewForValue);
 	
-					tr.setPadding(2, 2, 2, 2);
+					row.setPadding(2, 2, 2, 2);
 	
 					/* Add row to TableLayout. */
 					TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
 							LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT);
-					tl.addView(tr, layoutParams);
+					tl.addView(row, layoutParams);
 				}
 			}
 		}

@@ -1,5 +1,11 @@
 package com.intalio.cloud.android.model;
 
+
+/**
+ * This class defines the cloud objects with their names
+ * also it defines the group names which holds the cloud
+ * objects.
+ */
 public class CloudObjects {
 	
 	public String[] getCloudObjectGroups(){

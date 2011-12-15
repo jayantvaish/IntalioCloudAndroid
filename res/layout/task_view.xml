@@ -7,13 +7,19 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
+        
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="625px"
+            android:padding="5dp" />
 
         <HorizontalScrollView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:fillViewport="true"
-            android:scrollbars="none"
-            android:layout_alignParentBottom="true" >
+            android:scrollbars="none" >
 
             <TabWidget
                 android:id="@android:id/tabs"
@@ -21,14 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:background="#F2F2F2" />
-        </HorizontalScrollView>
-
-            <FrameLayout
-                android:id="@android:id/tabcontent"
-                android:layout_width="fill_parent"
-                android:layout_height="650px"
-                android:padding="5dp" />
-        
+        </HorizontalScrollView>        
     </RelativeLayout>
 
 </TabHost>

@@ -14,7 +14,12 @@ import android.widget.TextView;
 
 import com.intalio.cloud.android.common.Constants;
 import com.intalio.cloud.android.view.R;
-
+/**
+ * This class manages the expandable type of view,
+ * where the data in list are shown with their icons.
+ * View is divided into two types, one is GroupView 
+ * and when click on this view their children are shown.
+ */
 public class CustomExpandableListAdapter extends SimpleExpandableListAdapter {
 	
 	private final Context context;
@@ -23,10 +28,6 @@ public class CustomExpandableListAdapter extends SimpleExpandableListAdapter {
 	private final LayoutInflater inflater;
 	private final List<HashMap<String, String>> groupData;
 	private final List<ArrayList<HashMap<String, String>>> childData;
-	private final String[] groupFrom;
-	private final String[] childFrom;
-	private final int[] groupTo;
-	private final int[] childTo;
 	
 	private static class GroupViewHolder {
 		public ImageView groupImage;
@@ -57,10 +58,6 @@ public class CustomExpandableListAdapter extends SimpleExpandableListAdapter {
 		this.childLayout = childLayout;
 		this.groupData = groupData;
 		this.childData = childData;
-		this.groupFrom = groupFrom;
-		this.childFrom = childFrom;
-		this.groupTo = groupTo;
-		this.childTo = childTo;
 	}
 	
 	@Override
@@ -81,6 +78,12 @@ public class CustomExpandableListAdapter extends SimpleExpandableListAdapter {
         return convertView;
     }
 	
+	/**
+	 * Binds the view of the group, so that each group is shown with their
+	 * corresponding icons.
+	 * @param groupViewHolder
+	 * @param groupName
+	 */
 	private void bindGroupView(GroupViewHolder groupViewHolder, String groupName){
 		if (groupName.equals(Constants.OBJECT_GROUP_ACTIVITIES)) {
 			groupViewHolder.groupImage.setImageDrawable(context.getResources().getDrawable(R.drawable.activities));
@@ -118,6 +121,13 @@ public class CustomExpandableListAdapter extends SimpleExpandableListAdapter {
         return convertView;
     }
 	
+	
+	/**
+	 * Binds the view of the group, so that each object is shown with their
+	 * corresponding icon.
+	 * @param childViewHolder
+	 * @param objectName
+	 */
 	private void bindChildView(ChildViewHolder childViewHolder, String objectName){
 		if (objectName.equals(Constants.OBJECT_EVENTS)) {
 			childViewHolder.objectImage.setImageDrawable(context.getResources().getDrawable(R.drawable.events));

@@ -12,7 +12,9 @@ import com.intalio.cloud.android.common.Constants;
 import com.intalio.cloud.android.model.Records;
 
 /**
- * It defines all the details of any cloud's object record.
+ * This class creates activity to show the cloud object's record details.
+ * Details may contain related objects which will be shown by the horizontal
+ * scroll tabs.
  *
  */
 public class RecordDetails extends TabActivity {

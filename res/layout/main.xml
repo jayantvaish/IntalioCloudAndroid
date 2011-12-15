@@ -7,9 +7,9 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="16px" >
+        android:layout_marginTop="16px" >    
 
-        <TableRow >
+        <TableRow>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -21,17 +21,18 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/username"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12px"
                 android:layout_marginBottom="12px"
+                android:layout_marginLeft="12px"
+                android:background="#F0F0F0"
                 android:textColor="#282828"
                 android:textSize="14px"
-                android:width="100px"
-                android:background="#F0F0F0" />
+                android:width="100px" />
         </TableRow>
 
-        <TableRow >
+        <TableRow>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -43,14 +44,15 @@
                 android:textStyle="bold" />
 
             <EditText
+                android:id="@+id/password"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12px"
+                android:background="#F0F0F0"
                 android:password="true"
                 android:textColor="#282828"
                 android:textSize="14px"
-                android:width="100px"
-                android:background="#F0F0F0" />
+                android:width="100px" />
         </TableRow>
 
         <TableRow
@@ -66,7 +68,19 @@
                 android:textColor="#FFFFFF"
                 android:textSize="14px"
                 android:textStyle="bold" />
-        </TableRow>
+        </TableRow> 
+        
+        <!-- <TableRow 
+            android:gravity="center"
+            android:layout_marginTop="16px" >
+            <TextView
+                android:id="@+id/result"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#282828"
+                android:textSize="14px"
+                android:textStyle="bold" />
+        </TableRow> -->
     </TableLayout>
-    
+
 </LinearLayout>

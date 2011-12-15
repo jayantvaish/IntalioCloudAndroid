@@ -19,8 +19,13 @@ import com.intalio.cloud.android.adapter.CustomAdapter;
 import com.intalio.cloud.android.common.Constants;
 import com.intalio.cloud.android.widget.LoadingListView;
 
-/**
- * Defines loading type list view with the functionality of search filters.
+/** 
+ * This class creates activity to show the list of cloud object records
+ * These records are loaded in for of list, but it's limit is defined,
+ * when the user will scroll down list will again start loading if it will
+ * contains the data.
+ * 
+ * It also supports the search filter, where contents can be filter.
  *
  */
 public class ListRecords extends Activity implements SearchView.OnQueryTextListener, OnKeyListener {
@@ -38,44 +43,27 @@ public class ListRecords extends Activity implements SearchView.OnQueryTextListe
         recordSearchView = (SearchView) findViewById(R.id.search_view);        
         recordSearchView.setVisibility(View.GONE);
         
-        ActionBar actionBar = this.getActionBar();	
-        
+        ActionBar actionBar = this.getActionBar();        
     	
         recordListView = (LoadingListView) findViewById(R.id.list_view);
         recordListView.setLoadingView(getLayoutInflater().inflate(R.layout.loading_view, null));
 		Bundle extras = getIntent().getExtras();
         String selectedDate = extras.getString(Constants.TASK_SELECTED_DATE);
         String relatedObject = extras.getString(Constants.RELATED_OBJECT);
-        final String objectName = extras.getString(Constants.OBJECT);
+        String objectName = extras.getString(Constants.OBJECT);
+        
+        recordListView.setTextFilterEnabled(true);
         
         if(selectedDate != null){   
-        	//TODO: change following logic for tasks.
         	actionBar.setIcon(R.drawable.blank); 
         	actionBar.setDisplayUseLogoEnabled(false);
         	actionBar.setTitle(selectedDate);
-        	customAdapter = new CustomAdapter(this, R.layout.list_item, objectName);
-        	recordListView.setAdapter(customAdapter);       					
-	        recordListView.setTextFilterEnabled(true);	        
-	        recordListView.setOnItemClickListener(new OnItemClickListener() {
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {				
-					Intent recordDetailsIntent = new Intent(view.getContext(),	RecordDetails.class);
-					String[] recordNameWithXid = customAdapter.getItem(position).split(Constants.DELIMITER);
-					String xid = recordNameWithXid[0];
-					String recordName = recordNameWithXid[1];
-					recordDetailsIntent.putExtra(Constants.OBJECT, objectName);
-					recordDetailsIntent.putExtra(Constants.RECORD, recordName);
-					recordDetailsIntent.putExtra(Constants.XID, xid);
-					startActivityForResult(recordDetailsIntent, 0);
-				}
-			});   	
-        	
+        	setUpAdapterAndActivity(objectName);        	
         } else if (relatedObject != null) {			
 			Log.d("ListRecords", "Object name is: " + objectName);
 			String xid = extras.getString(Constants.XID);
 			customAdapter = new CustomAdapter(this, R.layout.list_item, relatedObject, objectName, xid);
         	recordListView.setAdapter(customAdapter);
-	        recordListView.setTextFilterEnabled(true);
 		} else if (objectName != null) {			
 			Log.d("ListRecords", "Object name is: " + objectName);
 			if(!objectName.equals(Constants.OBJECT_TASKS)){
@@ -83,42 +71,45 @@ public class ListRecords extends Activity implements SearchView.OnQueryTextListe
 		    	actionBar.setDisplayUseLogoEnabled(false);
 				actionBar.setTitle(objectName);
 			}	
-			customAdapter = new CustomAdapter(this, R.layout.list_item, objectName);
-        	recordListView.setAdapter(customAdapter);
-	        recordListView.setTextFilterEnabled(true);
-	        
-	        recordListView.setOnItemClickListener(new OnItemClickListener() {
-				public void onItemClick(AdapterView<?> parent, View view,
-						int position, long id) {				
-					Intent recordDetailsIntent = new Intent(view.getContext(),	RecordDetails.class);
-					String[] recordNameWithXid = customAdapter.getItem(position).split(Constants.DELIMITER);
-					String xid = recordNameWithXid[0];
-					String recordName = recordNameWithXid[1];
-					recordDetailsIntent.putExtra(Constants.OBJECT, objectName);
-					recordDetailsIntent.putExtra(Constants.RECORD, recordName);
-					recordDetailsIntent.putExtra(Constants.XID, xid);
-					startActivityForResult(recordDetailsIntent, 0);
-				}
-			});
-		}  
-        
+			setUpAdapterAndActivity(objectName);			
+		}          
         customAdapter.notifyMayHaveMorePages();
-		recordListView.setOnKeyListener(this);	
-		/*recordSearchView.setOnCloseListener(new OnCloseListener() {
-		      @Override
-		      public boolean onClose() {
-		    	recordSearchView.setVisibility(View.GONE);
-		        return false;
-		      }
-		    });*/
+		recordListView.setOnKeyListener(this);
     }
     
+    private void setUpAdapterAndActivity(final String objectName) {
+    	customAdapter = new CustomAdapter(this, R.layout.list_item, objectName);
+    	recordListView.setAdapter(customAdapter);	        
+        recordListView.setOnItemClickListener(new OnItemClickListener() {
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {				
+				Intent recordDetailsIntent = new Intent(view.getContext(),	RecordDetails.class);
+				String[] recordNameWithXid = customAdapter.getItem(position).split(Constants.DELIMITER);
+				String xid = recordNameWithXid[0];
+				String recordName = recordNameWithXid[1];
+				recordDetailsIntent.putExtra(Constants.OBJECT, objectName);
+				recordDetailsIntent.putExtra(Constants.RECORD, recordName);
+				recordDetailsIntent.putExtra(Constants.XID, xid);
+				startActivityForResult(recordDetailsIntent, 0);
+			}
+		});
+		
+	}
+
+	/**
+     * Defines the property of the search view dialog.
+     */
     private void setupSearchView() {
     	recordSearchView.setIconifiedByDefault(false);
         recordSearchView.setOnQueryTextListener(this);
         recordSearchView.setSubmitButtonEnabled(false);
     }
-
+    
+    
+    /**
+     * Defines the list view when text changes on 
+     * search view dialog.
+     */
     public boolean onQueryTextChange(String newText) {
         if (TextUtils.isEmpty(newText)) {
             recordListView.clearTextFilter();

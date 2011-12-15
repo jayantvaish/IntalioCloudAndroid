@@ -11,8 +11,10 @@ import android.widget.TabHost;
 import com.intalio.cloud.android.common.Constants;
 
 /**
- * It defines the view of Task object in Agenda and Calendar view.
- *
+ * This class creates the activity when clicked on task.
+ * It defines the view which contains the horizontal scroll tab
+ * with agenda type of view which will show all the tasks and second
+ * tab will be calendar view which will show tasks in calendar view. 
  */
 public class TaskView extends TabActivity {
 	

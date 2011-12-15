@@ -33,9 +33,6 @@ public class LoadingListView extends ListView implements HasMorePagesListener {
     public void setPinnedHeaderView(View view) {
         mHeaderView = view;
 
-        // Disable vertical fading when the pinned header is present
-        // TODO change ListView to allow separate measures for top and bottom fading edge;
-        // in this particular case we would like to disable the top, but not the bottom edge.
         if (mHeaderView != null) {
             setFadingEdgeLength(0);
         }

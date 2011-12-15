@@ -8,16 +8,17 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
-        <!-- <ScrollView
+        <HorizontalScrollView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" > -->
+            android:layout_height="wrap_content"
+            android:fillViewport="true" >
 
             <FrameLayout
                 android:id="@android:id/tabcontent"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp" />
-        <!-- </ScrollView> -->
+        </HorizontalScrollView>
 
         <HorizontalScrollView
             android:layout_width="fill_parent"

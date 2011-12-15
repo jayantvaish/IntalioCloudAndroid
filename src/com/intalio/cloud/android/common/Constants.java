@@ -8,7 +8,7 @@ public class Constants {
 	/**
 	 * This url is to read json data.
 	 */
-	public static final String URL = "http://192.168.2.103:7070/android/data.json";
+	public static final String URL = "http://192.168.2.102:7070/android/data.json";
 	
 	/**
 	 * Defines how much records to be fetched at a time.
@@ -16,9 +16,9 @@ public class Constants {
 	public static final int RECORD_LIMIT = 10;
 	
 	/**
-	 * Delimiter is used to separate various required fiels of json object.
+	 * Delimiter is used to separate various required fields of json object.
 	 */
-	public static final String DELIMITER = "//";  //This delimiter is used to separate xid and name of crm object's row.
+	public static final String DELIMITER = "//";  
 	
 	/**
 	 * Using this as a background color in tab content for agenda view.
